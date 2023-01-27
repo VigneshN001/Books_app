@@ -70,3 +70,7 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem 'zeitwerk', '~> 2.6', '>= 2.6.6'
+gem "jwt"
+gem "rack-cors"

@@ -1,0 +1,1 @@
+Zeitwerk::Loader.for_gem.setup
