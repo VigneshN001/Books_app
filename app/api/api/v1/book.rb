@@ -12,8 +12,7 @@ module API::V1
           requires :isbn, type: String
         end
         post '/new' do 
-          Book.new(title: 'sos', language: 'English', price: 20, author: 'soss', isbn: '123456').save
-            
+                
           book = Book.new(title: params[:title], language: params[:language], price: params[:price], author: params[:author], isbn: params[:isbn]).save
           present book, with: API::V1::Entities::Book
         end
@@ -52,8 +51,10 @@ module API::V1
         end
 
         desc "All book contents"
-        get 'all' do
-          Book.all
+        
+        get :all  do
+         book = Book.get_all_book
+         present book, with: API::V1::Entities::Book
         end
 
         desc "Get details of all books with a given author name"

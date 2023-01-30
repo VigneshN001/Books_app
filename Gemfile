@@ -74,3 +74,4 @@ end
 gem 'zeitwerk', '~> 2.6', '>= 2.6.6'
 gem "jwt"
 gem "rack-cors"
+gem 'byebug', '~> 11.1', '>= 11.1.3'
