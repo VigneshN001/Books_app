@@ -9,12 +9,17 @@ module API::V1
           requires :language, type: String
           requires :price, type: Float
           requires :author, type: String
-          requires :isbn_number, type: String
+          requires :isbn, type: String
         end
-        post do
-          book = Book.create!(title: params[:title], language: params[:language], price: params[:price], author: params[:author], isbn_number: params[:isbn_number])
+        post '/new' do 
+          Book.new(title: 'sos', language: 'English', price: 20, author: 'soss', isbn: '123456').save
+            
+          book = Book.new(title: params[:title], language: params[:language], price: params[:price], author: params[:author], isbn: params[:isbn]).save
           present book, with: API::V1::Entities::Book
         end
+
+        
+        
 
         desc "Update a book"
         params do
@@ -23,11 +28,11 @@ module API::V1
           optional :language, type: String
           optional :price, type: Float
           optional :author, type: String
-          optional :isbn_number, type: String
+          optional :isbn, type: String
         end
         put ':id' do
           book = Book.find(params[:id])
-          book.update(title: params[:title], language: params[:language], price: params[:price], author: params[:author], isbn_number: params[:isbn_number])
+          book.update(title: params[:title], language: params[:language], price: params[:price], author: params[:author], isbn: params[:isbn])
           present book, with: API::V1::Entities::Book
         end
 
@@ -46,17 +51,24 @@ module API::V1
           present book, with: API::V1::Entities::Book
         end
 
+        desc "All book contents"
+        get 'all' do
+          Book.all
+        end
+
         desc "Get details of all books with a given author name"
         params do
           requires :author, type: String
         end
+        
         get :by_author do
-          books = Book.where(author: params[:author])
+          books = Book.find_by_author(params[:author])
           present books, with: API::V1::Entities::Book
         end
       end
     end
   end
+
 
 
 

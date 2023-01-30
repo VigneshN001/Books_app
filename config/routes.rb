@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
     
       
-        mount API::Base => '/book'
+        mount API::Base => '/'
 end
 
 
